@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.db
+.vscode/
+.idea/
+.venv/
+venv/
+ENV/
+*.webp
+*.png
+test_validation.py
+test_startup.py
+db_tester.py
+submit_solution.py
