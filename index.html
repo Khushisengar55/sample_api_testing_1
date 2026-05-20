@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bajaj Finserv Health Hiring Challenge | Khushi Sengar</title>
+    <meta name="description" content="Hiring Challenge execution dashboard for Khushi Sengar (Reg: 0827CD231043) for Question 1. Built with modern glassmorphism, ANSI SQL, and Netlify Serverless Functions.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="dark-theme">
+    <!-- Glowing Background blobs -->
+    <div class="glow-bg-1"></div>
+    <div class="glow-bg-2"></div>
+    <div class="glow-bg-3"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-logo">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="pulse">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="url(#blueGrad)" />
+                    <path d="M2 17L12 22L22 17" stroke="url(#blueGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M2 12L12 17L22 12" stroke="url(#blueGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <defs>
+                        <linearGradient id="blueGrad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#3b82f6" />
+                            <stop offset="1" stop-color="#06b6d4" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <div class="logo-text">
+                    <h1>Bajaj Finserv Health</h1>
+                    <span class="sub-logo">Developer Hiring Challenge - Q1</span>
+                </div>
+            </div>
+            <div class="status-badge live-connected" id="connection-status">
+                <span class="status-dot"></span>
+                <span>Gateway Live</span>
+            </div>
+        </header>
+
+        <!-- Main Layout -->
+        <div class="dashboard-grid">
+            <!-- Left Side: Candidate Profile & SQL Problem -->
+            <div class="grid-left">
+                <!-- Profile Card -->
+                <section class="card profile-card" id="profile-section">
+                    <div class="card-glow"></div>
+                    <div class="profile-header">
+                        <div class="avatar">KS</div>
+                        <div class="profile-info">
+                            <h2>Khushi Sengar</h2>
+                            <p class="email">khushisengar230110@acropolis.in</p>
+                        </div>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Registration No:</span>
+                            <span class="detail-val accent-blue">0827CD231043</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Assigned Question:</span>
+                            <span class="detail-val badge-q">Question 1 (Odd)</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Language:</span>
+                            <span class="detail-val badge-lang">Python 3.10</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Repository:</span>
+                            <a href="https://github.com/Khushisengar55/sample_api_testing_1" class="detail-val repo-link" target="_blank">sample_api_testing_1 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg></a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Problem Statement Card -->
+                <section class="card problem-card" id="problem-section">
+                    <h3>Problem Statement</h3>
+                    <p>Find the <strong>highest salary</strong> that was credited to an employee, but only for transactions that were <strong>not made on the 1st day</strong> of any month. Extract:</p>
+                    <ul class="styled-list">
+                        <li><strong>SALARY</strong>: Highest credited salary (excluding day 1)</li>
+                        <li><strong>NAME</strong>: Combined First & Last name (e.g. <code>Emily Brown</code>)</li>
+                        <li><strong>AGE</strong>: Precise age dynamically computed from DOB</li>
+                        <li><strong>DEPARTMENT_NAME</strong>: Employee's department</li>
+                    </ul>
+                    <div class="db-tables">
+                        <h4>Simulated Schema:</h4>
+                        <div class="tags-row">
+                            <span class="table-tag">DEPARTMENT</span>
+                            <span class="table-tag">EMPLOYEE</span>
+                            <span class="table-tag">PAYMENTS</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Side: SQL Code & Sandbox execution -->
+            <div class="grid-right">
+                <!-- SQL Code View -->
+                <section class="card code-card" id="code-section">
+                    <div class="code-header">
+                        <span class="code-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg> Production-Grade ANSI SQL Query</span>
+                        <button class="btn-copy" id="btn-copy-code" title="Copy Query">Copy</button>
+                    </div>
+                    <pre><code class="sql-code" id="sql-query-text">SELECT 
+    p.AMOUNT AS SALARY,
+    CONCAT(e.FIRST_NAME, ' ', e.LAST_NAME) AS NAME,
+    (EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM e.DOB) - 
+     CASE 
+         WHEN EXTRACT(MONTH FROM CURRENT_DATE) < EXTRACT(MONTH FROM e.DOB) 
+              OR (EXTRACT(MONTH FROM CURRENT_DATE) = EXTRACT(MONTH FROM e.DOB) 
+                  AND EXTRACT(DAY FROM CURRENT_DATE) < EXTRACT(DAY FROM e.DOB)) 
+         THEN 1 
+         ELSE 0 
+     END) AS AGE,
+    d.DEPARTMENT_NAME
+FROM PAYMENTS p
+JOIN EMPLOYEE e ON p.EMP_ID = e.EMP_ID
+JOIN DEPARTMENT d ON e.DEPARTMENT = d.DEPARTMENT_ID
+WHERE EXTRACT(DAY FROM p.PAYMENT_TIME) != 1
+ORDER BY p.AMOUNT DESC
+LIMIT 1;</code></pre>
+                </section>
+
+                <!-- Cloud Interactive Live execution panel -->
+                <section class="card action-card" id="action-section">
+                    <div class="action-header">
+                        <h3>Pipeline Live Execution Control</h3>
+                        <button class="btn-primary" id="btn-trigger-pipeline">
+                            <span class="btn-text">Run Pipeline Live</span>
+                            <span class="btn-loader hidden"></span>
+                        </button>
+                    </div>
+                    <p class="action-desc">Click to invoke the cloud pipeline serverless function. It will contacts the hiring API gateway, generate a unique webhook and JWT token, and dynamically submit the SQL query solution.</p>
+                    
+                    <div class="console-box" id="console-display">
+                        <div class="console-header">
+                            <span class="console-dot red"></span>
+                            <span class="console-dot yellow"></span>
+                            <span class="console-dot green"></span>
+                            <span class="console-title">Execution Console</span>
+                        </div>
+                        <div class="console-body" id="console-body">
+                            <div class="line system">[SYSTEM] Dashboard loaded and ready. Ready to invoke Netlify serverless function.</div>
+                            <div class="line prompt">Click 'Run Pipeline Live' to start execution...</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Local Mock Execution Verification -->
+        <section class="card mock-verification-card" id="mock-section">
+            <div class="mock-header">
+                <h3>🧪 Local Mock Verification Engine (SQLite)</h3>
+                <span class="status-tag success">Verified Passed</span>
+            </div>
+            <p>Our mock database simulator built in <code>database.py</code> replicates the exact sample schema in-memory to confirm correctness of our query's logic prior to production submission.</p>
+            <div class="mock-grid">
+                <div class="mock-info-block">
+                    <div class="stat-num">INR 74,998.00</div>
+                    <div class="stat-lbl">Identified Salary</div>
+                </div>
+                <div class="mock-info-block">
+                    <div class="stat-num">Emily Brown</div>
+                    <div class="stat-lbl">Credited Employee</div>
+                </div>
+                <div class="mock-info-block">
+                    <div class="stat-num">33</div>
+                    <div class="stat-lbl">Calculated Age</div>
+                </div>
+                <div class="mock-info-block">
+                    <div class="stat-num">Sales</div>
+                    <div class="stat-lbl">Department</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2026 Bajaj Finserv Health Hiring Challenge. Crafted for Khushi Sengar (Reg: 0827CD231043).</p>
+            <div class="footer-links">
+                <a href="https://github.com/Khushisengar55/sample_api_testing_1" target="_blank">GitHub Repo</a>
+                <span class="separator">•</span>
+                <a href="http://khushi-sengar-bfh.netlify.app" target="_blank">Live App</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
